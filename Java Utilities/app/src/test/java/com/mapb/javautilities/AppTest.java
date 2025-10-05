@@ -4,11 +4,15 @@
 package com.mapb.javautilities;
 
 import org.junit.jupiter.api.Test;
+
+import com.mapb.javautilities.utilities.ValidarDni;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test 
+    void TestDNI1() {
+    	boolean prueba = ValidarDni.validarDni("17483753G");
+    	assertTrue(prueba);
     }
 }
