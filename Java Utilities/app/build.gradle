@@ -34,7 +34,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.mapb.JavaUtilities.App'
+    mainClass = 'com.mapb.javautilities.App'
 }
 
 tasks.named('test') {

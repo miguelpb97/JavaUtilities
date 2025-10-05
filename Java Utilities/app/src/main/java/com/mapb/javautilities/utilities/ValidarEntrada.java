@@ -1,4 +1,4 @@
-package com.mapb.JavaUtilities.utilities;
+package com.mapb.javautilities.utilities;
 
 import java.io.BufferedReader;
 import java.io.IOException;

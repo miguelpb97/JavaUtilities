@@ -1,4 +1,4 @@
-package com.mapb.JavaUtilities.xml;
+package com.mapb.javautilities.xml;
 
 import java.io.File;
 import java.io.IOException;
