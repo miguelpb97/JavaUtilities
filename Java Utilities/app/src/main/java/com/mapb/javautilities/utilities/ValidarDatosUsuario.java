@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
  */
 public class ValidarDatosUsuario {
 
-	private static final String ER_TLF = "^[6|7]{1}+[0-9]{8}$";
-	private static final String ER_DNICOMPLETO = "(\\d{8})([A-Za-z]{1})";
+	private static final String ER_TLF = "^[67][0-9]{8}$";
+	private static final String ER_DNICOMPLETO = "([0-9]{8})([A-Z]{1})$";
 	private static final String ER_DNISINLETRA = "(\\d{8})";
 	private static char[] letrasDni = { 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S',
 			'Q', 'V', 'H', 'L', 'C', 'K', 'E' };
@@ -27,7 +27,7 @@ public class ValidarDatosUsuario {
 		// No se permiten instanciar objetos de esta clase
 	}
 
-	// Saber si un usuario es mayor de edad o no con su fecha de nacimiento en date
+	// Saber si un usuario es mayor de edad o no con su fecha de nacimiento de tipo Date
 	public static boolean esMayorDeEdad(Date fecha) {
 		boolean esMayor = false;
 		LocalDate fechaNueva = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -55,35 +55,31 @@ public class ValidarDatosUsuario {
 		Matcher m = p.matcher(dni);
 		String numeros = "";
 		String letra = "";
-		while (m.find()) {
+		if (m.matches()) {
 			numeros = m.group(1);
 			letra = m.group(2);
-		}
-
-		int dniInt = Integer.parseInt(numeros);
-		int resto = dniInt % 23;
-		char letraObtenida = letrasDni[resto];
-		String letraObtenidaSt = Character.toString(letraObtenida);
-		if (letra.toUpperCase().equals(letraObtenidaSt)) {
-			comprobarDni = true;
+			int dniInt = Integer.parseInt(numeros);
+			int resto = dniInt % 23;
+			char letraObtenida = letrasDni[resto];
+			String letraObtenidaSt = Character.toString(letraObtenida);
+			if (letra.toUpperCase().equals(letraObtenidaSt)) {
+				comprobarDni = true;
+			}
 		}
 		return comprobarDni;
 	}
 
 	// Obtener la letra correspondiente a un dni dado por parametro
-	public static char obtenerLetraDni(String dni) {
+	public static String obtenerLetraDni(String dni) {
 		Pattern p = Pattern.compile(ER_DNISINLETRA);
 		Matcher m = p.matcher(dni);
 		String numeros = "";
-		if (dni.isBlank() || dni.isEmpty()) {
-			throw new NullPointerException("Error: dni no válido");
-		}
-		while (m.matches()) {
+		if (m.matches()) {
 			numeros = m.group(1);
 		}
 		int dniInt = Integer.parseInt(numeros);
 		int resto = dniInt % 23;
-		return letrasDni[resto];
+		return String.valueOf(letrasDni[resto]);
 	}
 	
 	// Validar número de teléfono
@@ -91,11 +87,7 @@ public class ValidarDatosUsuario {
     	Pattern pattern = Pattern.compile(ER_TLF);
     	Matcher matcher = pattern.matcher(campo);
         boolean matchFound = matcher.find();
-        if (!campo.isBlank() && matchFound) {
-            return true;
-        } else {
-            return false;
-        }
+        return !campo.isBlank() && matchFound;
     }
 
 }

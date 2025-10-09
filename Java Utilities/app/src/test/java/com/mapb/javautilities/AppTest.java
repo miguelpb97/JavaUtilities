@@ -3,16 +3,54 @@
  */
 package com.mapb.javautilities;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import com.mapb.javautilities.utilities.ValidarDni;
-
-import static org.junit.jupiter.api.Assertions.*;
+import com.mapb.javautilities.utilities.ValidarDatosUsuario;
 
 class AppTest {
+	
     @Test 
-    void TestDNI1() {
-    	boolean prueba = ValidarDni.validarDni("17483753G");
+    void TestDniValidoValidaCorrectamente() {
+    	boolean prueba = ValidarDatosUsuario.validarDni("17483753G");
     	assertTrue(prueba);
     }
+
+    @Test 
+    void TestDniValidoObtieneLetraCorrecta() {
+    	String prueba = ValidarDatosUsuario.obtenerLetraDni("17483753");
+    	assertEquals("G", prueba);
+    }
+    
+    @Test 
+    void TestDnisNoValidosValidaCorrectamente() {
+    	boolean prueba1 = ValidarDatosUsuario.validarDni("32256332F");
+    	boolean prueba2 = ValidarDatosUsuario.validarDni("3223256332FF");
+    	boolean prueba3 = ValidarDatosUsuario.validarDni("32232512FF");
+    	assertFalse(prueba1);
+    	assertFalse(prueba2);
+    	assertFalse(prueba3);
+    }
+    
+    @Test 
+    void TestTelefonosValidosValidaCorrectamente() {
+    	boolean prueba1 = ValidarDatosUsuario.validarDni("684324563");
+    	boolean prueba2 = ValidarDatosUsuario.validarDni("723574123");
+    	assertTrue(prueba1);
+    	assertTrue(prueba2);
+    }
+    
+    @Test 
+    void TestTelefonosNoValidsoValidaCorrectamente() {
+    	boolean prueba1 = ValidarDatosUsuario.validarDni("884324563");
+    	boolean prueba2 = ValidarDatosUsuario.validarDni("2684324563");
+    	boolean prueba3 = ValidarDatosUsuario.validarDni("4324563");
+    	assertFalse(prueba1);
+    	assertFalse(prueba2);
+    	assertFalse(prueba3);
+    }
+
 }

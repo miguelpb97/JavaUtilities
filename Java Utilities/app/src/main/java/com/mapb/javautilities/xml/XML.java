@@ -23,7 +23,7 @@ import org.xml.sax.SAXException;
  */
 public class XML {
 
-    private void UtilidadesXML() {
+    private XML() {
         // No se permiten instanciar objetos de esta clase
     }
 
@@ -36,7 +36,7 @@ public class XML {
      * @return dom
      *
      */
-    public Document xmlToDom(String rutaXml) {
+    public static Document xmlToDom(String rutaXml) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
         try {
@@ -67,7 +67,7 @@ public class XML {
      * @param dom
      * @param ruta del xml
      */
-    public void domToXml(Document dom, String rutaXml) {
+    public static void domToXml(Document dom, String rutaXml) {
         File directorio = new File("datos/");
         File fichero = new File(rutaXml);
         // Comprobamos si existe o no el directorio y si noe xiste lo creamos
@@ -108,7 +108,7 @@ public class XML {
      *
      * @param raiz return dom
      */
-    public Document crearDomVacio(String raiz) {
+    public static Document crearDomVacio(String raiz) {
         try {
             DocumentBuilderFactory dbFactoria = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactoria.newDocumentBuilder();
