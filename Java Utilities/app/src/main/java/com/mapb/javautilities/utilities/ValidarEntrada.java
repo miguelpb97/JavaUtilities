@@ -32,7 +32,7 @@ public class ValidarEntrada {
         try {
             valor = teclado.readLine();
         } catch (IOException e) {
-            System.out.print("Error de Entrada/Salida. Inténtalo de nuevo: ");
+            System.err.print("Error de Entrada/Salida:\n" + e + "\nInténtalo de nuevo: ");
         }
         return valor;
     }
